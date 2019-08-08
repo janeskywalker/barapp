@@ -18,18 +18,6 @@ class Tab(models.Model):
     def __str__(self):
         return self.open_date_time
 
-
-# drink model
-class Drink(models.Model):
-    name = models.CharField(max_length=100, default="unassigned")
-    price = models.IntegerField(default=0)
-    tab = models.ForeignKey(
-        Tab, on_delete=models.CASCADE, related_name='drinks')
-
-    def __str__(self):
-        return self.name
-
-
 # Ingredient model
 class Ingredient(models.Model):
     name = models.CharField(max_length=100, default="unassigned")
@@ -38,12 +26,22 @@ class Ingredient(models.Model):
     location = models.CharField(max_length=100, default="unassigned")
     single_serve = models.BooleanField(default=True)
     tasting_note = models.TextField(default="unassigned")
-    drink = models.ForeignKey(
-        Drink, on_delete=models.CASCADE, related_name='ingredients')
+    
 
     def __str__(self):
         return self.name
 
+# drink model
+class Drink(models.Model):
+    name = models.CharField(max_length=100, default="unassigned")
+    price = models.IntegerField(default=0)
+    tab = models.ForeignKey(
+        Tab, on_delete=models.CASCADE, related_name='drinks')
+    ingredient = models.ForeignKey(
+        Ingredient, on_delete=models.CASCADE, related_name='drinks')
+
+    def __str__(self):
+        return self.name
 
 # Recipe model
 class Recipe(models.Model):
