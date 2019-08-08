@@ -21,4 +21,5 @@ from barapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('barapp.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
