@@ -6,9 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    <title>Document</title>
+    <title>BarApp</title>
 </head>
 <body>
     <h1>It works!</h1>
+    <section class="container">
+        <section class="cats">
+            {% for category in categories %}
+                <div class="category">
+                    <h3>{{category}}</h3>
+                </div>
+            {% endfor %}
+        </section>
+        <div class="tab">TAB</div>
+    </section>
+
 </body>
 </html>
