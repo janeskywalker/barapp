@@ -28,7 +28,8 @@ class Category(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(max_length=100, default="unassigned")
     price = models.IntegerField(default=0)
-    category = models.ManyToManyField(Category)
+    # category = models.ManyToManyField(Category)
+    category = models.CharField(max_length=100, default="unassigned")
     location = models.CharField(max_length=100, default="unassigned")
     single_serve = models.BooleanField(default=True)
     tasting_note = models.TextField(default="unassigned")
