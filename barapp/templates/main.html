@@ -12,7 +12,7 @@
         <section id='category-panel' class="cats">
             {% for category in categories %}
                 <div class="category">
-                    <h3>{{category}}</h3>
+                    <h3>{{category.type}}</h3>
                 </div>
             {% endfor %}
         </section>
@@ -33,8 +33,14 @@
 
         </div>
         {% for category in categories %}
-            <section class="wrapper hidden {{category}}">
-                <section class="category-view">{{category}}</section>
+            <section class="wrapper hidden {{category.type}}">
+                <section class="category-view">
+                    {{category.type}}
+                    {% for ingredient in category.data %}
+                        <p>{{ingredient.name}}</p>
+                        
+                    {% endfor %}
+                </section>
                 <section class="mixers"></section>
                 <section class="drink"></section>
             </section>

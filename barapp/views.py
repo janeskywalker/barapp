@@ -3,17 +3,30 @@ from .models import *
 
 # Create your views here.
 def main(request):
-    categories = {
-        'Beer': 'Beer',
-        'Wine': 'Wine',
-        'Whiskey': 'Whiskey',
-        'Gin': 'Gin',
-        'Vodka': 'Vodka',
-        'Rum': 'Rum',
-        'Tequila': 'Tequila',
-        'Liquor': 'Liquor',
-        'Other/Mixers': 'Other/Mixers'
-        }
+    beers = Ingredient.objects.filter(category='beer')
+    wines = Ingredient.objects.filter(category='wine')
+    whiskeys = Ingredient.objects.filter(category='whiskey')
+    gins = Ingredient.objects.filter(category='gin')
+    vodkas = Ingredient.objects.filter(category='vodka')
+    rums = Ingredient.objects.filter(category='rum')
+    tequilas = Ingredient.objects.filter(category='tequila')
+    liquors = Ingredient.objects.filter(category='liquor')
+    mixers = Ingredient.objects.filter(category='mixer')
+    categories = [
+        {'type': 'Beer', 'data': beers},
+        {'type': 'Wine', 'data': wines},
+        {'type': 'Whiskey', 'data': whiskeys},
+        {'type': 'Gin', 'data': gins},
+        {'type': 'Vodka', 'data': vodkas},
+        {'type': 'Rum', 'data': rums},
+        {'type': 'Tequila', 'data': tequilas},
+        {'type': 'Liquor', 'data': liquors},
+        {'type': 'Mixers/Other', 'data': mixers},
+     
+    ]
+    
+
+    
         
     return render(request, 'main.html', {'categories': categories})
 
