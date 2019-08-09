@@ -8,13 +8,15 @@
             <h1>BarApp</h1>
             <button class="create-order">Start New Order</button>
         </section>
-        <section class="cats">
+        <!-- categories  -->
+        <section id='category-penel' class="cats">
             {% for category in categories %}
                 <div class="category">
                     <h3>{{category}}</h3>
                 </div>
             {% endfor %}
         </section>
+        <!-- receipt -->
         <div class="tab">
             <h4>Order</h4>
             <h6>Whisky Ginger    $6</h6>
@@ -31,5 +33,7 @@
 
         </div>
     </section>
+
+    <script src="static/scripts.js"></script>
 
     {% endblock %}
