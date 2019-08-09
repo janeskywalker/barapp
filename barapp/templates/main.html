@@ -32,12 +32,13 @@
             </section>
 
         </div>
-
-        <section class="wrapper hidden" id='wrapper'>
-            <section class="category-view"></section>
-            <section class="mixers"></section>
-            <section class="drink"></section>
-        </section>
+        {% for category in categories %}
+            <section class="wrapper hidden {{category}}">
+                <section class="category-view">{{category}}</section>
+                <section class="mixers"></section>
+                <section class="drink"></section>
+            </section>
+        {% endfor %}
     </section>
 
 
