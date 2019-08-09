@@ -16,3 +16,6 @@ def main(request):
         }
         
     return render(request, 'main.html', {'categories': categories})
+
+def build_drink(request):
+    return render(request, 'build_drink.html', {'categoryClicked': categoryClicked})

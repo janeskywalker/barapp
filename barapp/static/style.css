@@ -11,10 +11,11 @@ body {
 .container {
     display: grid;
     grid-template-areas:    'head head'
+                            'cat drink'
                             'cat tab'
                             'foot tab';
     grid-template-columns: 3fr 1.5fr;
-    grid-template-rows: 100px 1fr 50px;
+    grid-template-rows: 100px 1fr 1fr 50px;
     /* justify-items: center; */
     grid-auto-rows: minmax(100px, auto);
 }
@@ -46,6 +47,7 @@ body {
     padding: 10px;
     border-radius: 20px 20px 0 0;
     align-self: end;
+    z-index: 2;
 }
 
 .tab-buttons {
@@ -113,3 +115,39 @@ p {
     background: hotpink;
 }
 
+
+.wrapper{
+    background: rgb(250, 187, 28);
+    z-index: 1;
+    display: grid;
+    grid-column: 1 / 3;
+    grid-row: 2 / 4;
+    grid-template-areas:    'cat-view mix drink-view'
+                            'cat-view mix blank';
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.hidden {
+    display: none;
+}
+
+.category-view {
+    grid-area: cat-view;
+    background: blue;
+    border-radius: 20px;
+}
+
+.mixers {
+    grid-area: mix;
+    background: greenyellow;
+    border-radius: 20px;
+}
+
+.drink {
+    grid-area: drink-view;
+    background: plum;
+    width: 250px;
+    padding: 10px;
+    border-radius: 20px;
+}
