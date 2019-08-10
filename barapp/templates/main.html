@@ -3,9 +3,11 @@
 
 
 {% block content %}
+
     <section class="container">
         <section class="head">
             <h1>BarApp</h1>
+            <p>Welcome {{user.username}}!</p>
             <button class="create-order">Start New Order</button>
         </section>
         <!-- categories  -->
@@ -19,15 +21,11 @@
         <!-- receipt -->
         <div class="tab">
             <h4>Order</h4>
-            <h6>Whisky Ginger    $6</h6>
-            <h6>Whisky Ginger    $6</h6>
-            <h6>Whisky Ginger    $6</h6>
-            <h6>Whisky Ginger    $6</h6>
-            <h6>Whisky Ginger    $6</h6>
-            <h6>Whisky Ginger    $6</h6>
-            <h6>Whisky Ginger    $6</h6>
+
+            <div id='tab-display'></div>
+            <div id='sub-total'></div>
             <section class="tab-buttons">
-                <button class="close-tab">Close Tab</button>
+                <button class="close-tab {{user.id}}">Close Tab</button>
                 <button class="save-tab">Save Tab</button>
             </section>
 
@@ -37,12 +35,19 @@
                 <section class="category-view">
                     {{category.type}}
                     {% for ingredient in category.data %}
-                        <p>{{ingredient.name}}</p>
+                        <p class="{{ingredient.price}}">{{ingredient.name}}</p>
                         
                     {% endfor %}
                 </section>
-                <section class="mixers"></section>
-                <section class="drink"></section>
+                <section class="mixers">
+
+                </section>
+                <section class="drink">
+                        <h1>Drink</h1>
+                        <div class="drink-display"></div>
+
+                        <button class="save-drink">Save Drink</button>
+                </section>
             </section>
         {% endfor %}
     </section>

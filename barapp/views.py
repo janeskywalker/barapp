@@ -22,13 +22,15 @@ def main(request):
         {'type': 'Tequila', 'data': tequilas},
         {'type': 'Liquor', 'data': liquors},
         {'type': 'Mixers/Other', 'data': mixers},
-     
     ]
     
 
-    
-        
     return render(request, 'main.html', {'categories': categories})
 
 def build_drink(request):
     return render(request, 'build_drink.html', {'categoryClicked': categoryClicked})
+
+
+
+def saveTab(request):
+    print(request)
