@@ -1,5 +1,7 @@
 
 let drinkArray = []
+let tabArray = []
+
 let subTotal = 0
 
 const categoryPanel = document.querySelector('#category-panel')
@@ -63,10 +65,43 @@ saveDrinkBtn.addEventListener('click', (e)=>{
     })
 
     drinkDisplay.innerHTML = ""
+
+    tabArray = tabArray.concat(drinkArray)
+    console.log({tabArray})
+
     drinkArray = []
 
     console.log(subTotal)
     const subTotalDisplay = document.querySelector('#sub-total')
 
     subTotalDisplay.innerHTML = `Subtotal: $${subTotal}`
+
 })
+
+const closeTabBtn = document.querySelector('.close-tab')
+
+closeTabBtn.addEventListener('click', (e)=>{
+    console.log(tabArray)
+
+    const newTab = {
+        "close_date_time": `${new Date().toLocaleString}`, 
+        "user": `${e.target.classList[1]}`
+    }
+
+    // const addNewCity = (event) => {
+    //     event.preventDefault();
+    //     const name = document.getElementById('name');
+    //     const description = document.getElementById('description');
+    //     const newCity = ({name: name.value, description: description.value});
+        fetch("http://localhost:8000/savetab", {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newTab)
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data)
+          })
+          .catch((err) => console.log(err));
+})
+

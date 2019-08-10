@@ -3,9 +3,11 @@
 
 
 {% block content %}
+
     <section class="container">
         <section class="head">
             <h1>BarApp</h1>
+            <p>Welcome {{user.username}}!</p>
             <button class="create-order">Start New Order</button>
         </section>
         <!-- categories  -->
@@ -23,7 +25,7 @@
             <div id='tab-display'></div>
             <div id='sub-total'></div>
             <section class="tab-buttons">
-                <button class="close-tab">Close Tab</button>
+                <button class="close-tab {{user.id}}">Close Tab</button>
                 <button class="save-tab">Save Tab</button>
             </section>
 

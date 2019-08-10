@@ -23,7 +23,7 @@ def login(request):
             # create a sesstion and log in
             auth.login(request, user)
             # redirect
-            return redirect('main')
+            return redirect('main', {'currentUser': user})
         # else return not found
         else:
             return render(request, 'login.html', {'error': 'Invalid Credentials...'})
