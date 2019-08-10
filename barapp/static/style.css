@@ -5,7 +5,7 @@
 }
 
 body {
-    background: rgb(250, 187, 28);
+    background: #eee;
 }
 
 .container {
@@ -43,9 +43,9 @@ body {
     grid-area: tab;
     height: max-content;
     width: 250px;
-    background: rebeccapurple;
+    background: #999;
     padding: 10px;
-    border-radius: 20px 20px 0 0;
+    border-radius: 3px 3px 0 0;
     align-self: end;
     z-index: 2;
 }
@@ -63,11 +63,11 @@ body {
 }
 
 .close-tab {
-    background-color: rgb(46, 174, 0)
+    background-color: #999;
 }
 
 .save-tab {
-    background-color: rgb(216, 101, 0)
+    background-color: #999;
 }
 
 h3 {
@@ -87,9 +87,9 @@ h1 {
 }
 
 .create-order {
-    background: rgb(130, 249, 126);
+    background: rgb(100, 130, 240);
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 3px;
     margin-top:20px;
 
 }
@@ -112,11 +112,11 @@ h6 {
 }
 
 p {
-    background: hotpink;
+    background: #ccc;
 }
 
 
-.wrapper{
+.wrapper {
     background: rgb(250, 187, 28);
     z-index: 1;
     display: grid;

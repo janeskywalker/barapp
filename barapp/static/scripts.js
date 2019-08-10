@@ -7,7 +7,7 @@ let subTotal = 0
 const categoryPanel = document.querySelector('#category-panel')
 const wrapper = document.querySelector('#wrapper')
 
-categoryPanel.addEventListener('click', (e)=>{
+categoryPanel.addEventListener('click', (e) => {
     if (e.target.parentNode.tagName === 'DIV') {   
         // pick out category
         categoryClicked = e.target.textContent
