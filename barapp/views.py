@@ -41,5 +41,8 @@ def saveTab(request):
 def category(request, category_pk):
     drinks = Drink.objects.filter(category_id=category_pk)
     print("drinks:", drinks)
-    return render(request, 'category.html', {'drinks': drinks})
+    ingredients = Ingredient.objects.filter(category_id=category_pk)
+    print("ingredients:", ingredients)
+
+    return render(request, 'category.html', {'drinks': drinks, 'ingredients': ingredients})
 

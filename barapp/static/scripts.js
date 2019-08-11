@@ -1,5 +1,25 @@
 
 
+const drinkButton = document.querySelector('.drink-button')
+const drinkList = document.querySelector('.drink-list')
+
+const ingredientButton = document.querySelector('.ingredient-button')
+const ingredientList = document.querySelector('.ingredient-list')
+
+
+drinkButton.addEventListener('click', (e)=>{
+    drinkList.classList.remove('hide')
+    ingredientList.classList.add('hide')
+})
+
+
+ingredientButton.addEventListener('click', (e)=>{
+    ingredientList.classList.remove('hide')
+    drinkList.classList.add('hide')
+})
+
+
+
 // const categoryPanel = document.querySelector('#category-panel')
 
 
