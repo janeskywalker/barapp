@@ -109,10 +109,6 @@ p {
     grid-template-rows: 1fr 1fr;
 }
 
-.hidden {
-    display: none;
-}
-
 .category-view {
     grid-area: cat-view;
     background: blue;
