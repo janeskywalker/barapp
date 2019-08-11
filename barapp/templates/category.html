@@ -8,9 +8,7 @@
         <div class="drink-ingredients-panel">
 
             <header class="drink-ingredients-header">
-                <button class="drink-button">Drinks</button>
-                <button class="ingredient-button">ingredients</button>
-
+                <button class="item-button drink-button">Drinks</button><button class="item-button ingredient-button">ingredients</button>
             </header>
 
             <!-- show drink -->
@@ -21,7 +19,7 @@
             
             {% endfor %}
             </ul>
-
+            
             <ul class="item-list ingredient-list hide">
             {% for ingredient in ingredients %}
             <!-- show ingredients -->
@@ -39,6 +37,6 @@
         
     </main>
 
-    <script src="/static/scripts.js"></script>
+    <script src="/static/scripts/main.js"></script>
 
 {% endblock %}
