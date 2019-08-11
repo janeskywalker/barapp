@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <main class="container">
+
+        <!-- drink/ingredients  -->
+        <section id='drink-ingredients-panel' class="drink-ingredients-panel">
+
+            {% for drink in drinks %}
+
+            <h3>{{drink.name}}</h3>
+
+            {% endfor %}
+
+        </section>
+
+
+        <!-- receipt -->
+        {% include 'side_bar.html' %}
+        
+    </main>
+
+    <script src="/static/scripts.js"></script>
+
+{% endblock %}
