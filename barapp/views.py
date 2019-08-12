@@ -17,7 +17,7 @@ def findDrinkPrice(drink):
         'price': priceForIngredients(list(drink.ingredients.values()))
     }
 
-# Create your views here.
+
 def main(request):
     categories = Category.objects.all()
     print(categories)

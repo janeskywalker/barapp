@@ -2,23 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# from django.db.models import CharField, Model
-# from django_mysql.models import ListCharField
-# from djangotoolbox.fields import ListField
-
-# class Person(Model):
-#     name = CharField()
-#     post_nominals = ListCharField(
-#         base_field=CharField(max_length=10),
-#         size=6,
-#         max_length=(6 * 11)  # 6 * 10 character nominals, plus commas
-#     )
-
 # Create your models here.
-
-
-
-
 
 
 class Category(models.Model):
