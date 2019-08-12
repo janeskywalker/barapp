@@ -33,9 +33,13 @@ body {
 }
 
 .tab {
-    display: grid;
+    display: none;
     background: #999;
     padding: 10px;
+}
+
+.tab.show {
+    display: grid;
 }
 
 .tab-buttons {

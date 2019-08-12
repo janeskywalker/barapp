@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect
 from .models import *
+import datetime
 
 # Create your views here.
 def main(request):
     categories = Category.objects.all()
     print(categories)
-    return render(request, 'main.html', {'categories': categories})
+    current_tab = 0
+    if 'current_tab' in request.session:
+        current_tab = request.session['current_tab']
+    print(current_tab)
+    return render(request, 'main.html', {'categories': categories, 'current_tab': current_tab})
 
 def pretty_request(request):
     headers = ''
@@ -46,3 +51,15 @@ def category(request, category_pk):
 
     return render(request, 'category.html', {'drinks': drinks, 'ingredients': ingredients})
 
+
+def neworder(request):
+    if request.method == 'POST':
+        customername = request.POST['customername']
+        tab = Tab(name = customername, open_date_time = datetime.datetime.now())
+        tab.save()
+        print(tab.id)
+
+        request.session['current_tab'] = tab.id
+
+        return redirect('main')
+        
