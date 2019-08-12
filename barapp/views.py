@@ -54,6 +54,7 @@ def main(request):
         tab = Tab.objects.get(id=current_tab)
         drinks = list(map(findDrinkPrice, list(tab.drinks.all())))
         return render(request, 'main.html', { 'categories': categories, 'tab': {
+            'id': tab.id,
             'name': tab.name,
             'drinks': drinks,
             'ingredients': tab.ingredients
