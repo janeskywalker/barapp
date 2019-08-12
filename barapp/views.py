@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from functools import reduce
 import datetime
+import json
 from django.http import JsonResponse
 
 def priceForIngredients(ingredients):
@@ -73,10 +74,10 @@ def category(request, category_pk):
         current_tab = request.session['current_tab']
         print(current_tab)
         tab = Tab.objects.get(id=current_tab)
-        drinks = list(map(findDrinkPrice, list(tab.drinks.all())))
+        tabDrinks = list(map(findDrinkPrice, list(tab.drinks.all())))
         return render(request, 'category.html', { 'drinks': drinks, 'ingredients': ingredients, 'tab': {
             'name': tab.name,
-            'drinks': drinks,
+            'drinks': tabDrinks,
             'ingredients': tab.ingredients
         }})
     else:
@@ -116,3 +117,13 @@ def closeTab(request, tab_pk):
         if 'current_tab' in request.session:
             del request.session['current_tab']
         return redirect('main')
+
+def addDrinkToOrder(request):
+    if 'current_tab' in request.session:
+        if request.method == 'POST':
+            current_tab = request.session['current_tab']
+            tab = Tab.objects.get(id=current_tab)
+            json_obj = json.loads(request.body)
+            drink_id = json_obj['drink_id']
+            tab.drinks.add(Drink.objects.get(id=drink_id))
+            return JsonResponse({ 'status': 'success' })

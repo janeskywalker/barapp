@@ -31,6 +31,27 @@ drinkList.addEventListener('click', (e)=>{
                 'X-CSRFToken': csrfcookie()
             },
             body: JSON.stringify({
+                drink_id: target.dataset['id']
+            })
+        }).then((response) => {
+            // Render drink to sidebar
+        })
+    }
+})
+
+ingredientList.addEventListener('click', (e)=>{
+    const target = e.target
+    console.log('target: ', target)
+    if (target.dataset['id']) {
+        console.log(target.dataset['id'])
+
+        fetch('/addIngredientToOrder', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfcookie()
+            },
+            body: JSON.stringify({
                 id: target.dataset['id']
             })
         }).then((response) => {
