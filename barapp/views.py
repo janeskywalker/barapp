@@ -152,23 +152,32 @@ def addIngredientToOrder(request):
 def search(request):
     search_result = {}
     if request.POST:
-        if (request.POST['select-search'][0]):
+        if (request.POST['select-search']=='drink'):
             drink = request.POST['search-term']
             url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=%s' % drink
-            print(url)
             response = requests.get(url)
             search_was_successful = (response.status_code == 200)  
             search_result = response.json()
             search_result['success'] = search_was_successful
             return render(request, 'search_return.html', {'search_result': search_result})
-        elif (request.GET['select-search'][1]):
+        elif (request.POST['select-search']=='ingredient'):
             ingredient = request.POST['search-term']
             url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=%s' % ingredient
-            print(url)
             response = requests.get(url)
-            search_was_successful = (response.status_code == 200) 
             search_result = response.json()
+            full_drinks = []
+           
+            for drink in search_result['drinks']:
+                url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=%s' % drink['idDrink']
+                response = requests.get(url)
+                full_drink = (response.json())
+                full_drinks.append(full_drink['drinks'][0])
+            
+            results = {'drinks':full_drinks}
+            print(results)
+            search_was_successful = (response.status_code == 200) 
+            
             search_result['success'] = search_was_successful
-            return render(request, 'search_return.html', {'search_result': search_result})
+            return render(request, 'search_return.html', {'search_result': results})
     else: 
         return render(request, 'search_return.html', {'search_result': search_result})
