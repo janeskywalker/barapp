@@ -5,6 +5,7 @@ const closeTabBtn = document.querySelector('#close-tab-btn')
 const listOrderSection = document.querySelector('#list-order')
 const currentOrderSection = document.querySelector('#current-order')
 const newOrderSection = document.querySelector('#new-order')
+const orderList = document.querySelector('#order-list')
 
 function csrfcookie() {
     var cookieValue = null,
@@ -37,3 +38,4 @@ saveOrderBtn.addEventListener('click', (e)=>{
         }
     })
 })
+

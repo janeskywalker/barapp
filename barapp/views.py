@@ -15,7 +15,7 @@ def main(request):
         return render(request, 'main.html', { 'categories': categories, 'tab': tab})
     else:
         tabs = Tab.objects.all()
-        return render(request, 'main.html', { 'tabs': tabs})
+        return render(request, 'main.html', { 'categories': categories, 'tabs': tabs})
 
 def pretty_request(request):
     headers = ''
@@ -43,11 +43,6 @@ def build_drink(request):
     return render(request, 'build_drink.html', {'categoryClicked': categoryClicked})
 
 
-
-def saveTab(request):
-    print(request)
-
-
 def category(request, category_pk):
     drinks = Drink.objects.filter(category_id=category_pk)
     print("drinks:", drinks)
@@ -72,3 +67,10 @@ def saveOrder(request):
     if 'current_tab' in request.session:
         del request.session['current_tab']
     return JsonResponse({'status': 'success'})
+
+
+def startOrder(request, tab_pk):
+        print(tab_pk)
+        request.session['current_tab'] = tab_pk
+        # return JsonResponse({'status': 'success'})
+        return redirect('main')

@@ -20,7 +20,7 @@
         <ul id="order-list">
                 {% if tabs %}
                 {% for tab in tabs %}
-                <li>{{tab.name}}</li>
+                <li><a href="/startorder/{{tab.id}}" class="customer-link" data-id="{{tab.id}}">{{tab.name}}</a></li>
                 {% endfor %}
                 {% endif %}
         </ul>
