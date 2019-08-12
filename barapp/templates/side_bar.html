@@ -13,7 +13,7 @@
 
 
 
-
+<!-- list order -->
 <section id="list-order" class="list-order tab">
         <h3>List of Order:</h3>
     
@@ -28,14 +28,32 @@
     
 </section>
 
-<!-- 
-<section id="new-order" class="new-order tab">
-        <div class="tab-buttons">
-                <button class="close-tab">Close Tab</button>
-                <button class="save-tab">Save Tab</button>
-        </div>
+<!-- new order -->
+<section id="new-order" class="new-order tab hide">
+
+    <form method="POST" class="new-order-form">
+            {% csrf_token %}
+
+            <p>
+                <label for="Customer Name">Customer Name</label>
+                <input type="text" name="customername" required maxlength="25" minlength="2" />
+            </p>
+
+            <button type="submit">Submit new order</button>
+    </form>
         
-</section>  -->
+</section> 
+
+
+
+<!-- <div class="tab-buttons">
+        <button class="close-tab">Close Tab</button>
+        <button class="save-tab">Save Tab</button>
+</div> -->
 
 
 <script src="/static/scripts/side_bar.js"></script>
+
+
+
+
