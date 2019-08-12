@@ -156,28 +156,26 @@ def search(request):
             drink = request.POST['search-term']
             url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=%s' % drink
             response = requests.get(url)
-            search_was_successful = (response.status_code == 200)  
             search_result = response.json()
-            search_result['success'] = search_was_successful
             return render(request, 'search_return.html', {'search_result': search_result})
         elif (request.POST['select-search']=='ingredient'):
             ingredient = request.POST['search-term']
             url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=%s' % ingredient
             response = requests.get(url)
-            search_result = response.json()
-            full_drinks = []
-           
-            for drink in search_result['drinks']:
-                url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=%s' % drink['idDrink']
-                response = requests.get(url)
-                full_drink = (response.json())
-                full_drinks.append(full_drink['drinks'][0])
+            if (response.text):
+                search_result = response.json()
+                full_drinks = []
             
-            results = {'drinks':full_drinks}
-            print(results)
-            search_was_successful = (response.status_code == 200) 
-            
-            search_result['success'] = search_was_successful
-            return render(request, 'search_return.html', {'search_result': results})
+                for drink in search_result['drinks']:
+                    url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=%s' % drink['idDrink']
+                    response = requests.get(url)
+                    full_drink = response.json()
+                    full_drinks.append(full_drink['drinks'][0])
+                
+                results = {'drinks':full_drinks}
+
+                return render(request, 'search_return.html', {'search_result': results})
+            else:
+                return render(request, 'search_return.html', {'search_result': search_result})
     else: 
         return render(request, 'search_return.html', {'search_result': search_result})
