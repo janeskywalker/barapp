@@ -49,7 +49,17 @@ def category(request, category_pk):
     ingredients = Ingredient.objects.filter(category_id=category_pk)
     print("ingredients:", ingredients)
 
-    return render(request, 'category.html', {'drinks': drinks, 'ingredients': ingredients})
+    # return render(request, 'category.html', {'drinks': drinks, 'ingredients': ingredients})
+
+    current_tab = 0
+    if 'current_tab' in request.session:
+        current_tab = request.session['current_tab']
+        print(current_tab)
+        tab = Tab.objects.get(id=current_tab)
+        return render(request, 'category.html', { 'tab': tab, 'drinks': drinks, 'ingredients': ingredients})
+    else:
+        tabs = Tab.objects.all()
+        return render(request, 'category.html', { 'tabs': tabs, 'drinks': drinks, 'ingredients': ingredients})
 
 
 def newOrder(request):
@@ -63,14 +73,24 @@ def newOrder(request):
 
         return redirect('main')
         
-def saveOrder(request):
+def saveOrder(request, tab_pk):
     if 'current_tab' in request.session:
         del request.session['current_tab']
-    return JsonResponse({'status': 'success'})
+    return redirect('main')
 
 
 def startOrder(request, tab_pk):
         print(tab_pk)
         request.session['current_tab'] = tab_pk
         # return JsonResponse({'status': 'success'})
+        return redirect('main')
+
+
+def closeTab(request, tab_pk):
+        print(tab_pk)
+        tab = Tab.objects.get(id=tab_pk)
+        tab.close_date_time = datetime.datetime.now()
+        tab.save()
+        if 'current_tab' in request.session:
+            del request.session['current_tab']
         return redirect('main')

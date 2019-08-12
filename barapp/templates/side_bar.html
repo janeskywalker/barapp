@@ -71,8 +71,10 @@
         {% endif %}
 
         <div class="tab-buttons">
-                <button id="close-tab-btn" class="close-tab">Close Tab</button>
-                <button id="save-order-btn" class="save-tab">Save Tab</button>
+                <a href="/closetab/{{tab.id}}" id="close-tab-btn" class="close-tab">Close Tab</a>
+
+                <a href="/saveorder/{{tab.id}}" id="save-order-btn" class="save-order">Save Order</a>
+
         </div>
     
 </section>

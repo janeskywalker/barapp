@@ -1,5 +1,5 @@
 const newOrderBtn = document.querySelector('#new-order-btn')
-const saveOrderBtn = document.querySelector('#save-order-btn')
+// const saveOrderBtn = document.querySelector('#save-order-btn')
 const closeTabBtn = document.querySelector('#close-tab-btn')
 
 const listOrderSection = document.querySelector('#list-order')
@@ -30,12 +30,12 @@ newOrderBtn.addEventListener('click', (e)=>{
     newOrderSection.classList.add('show')
 })
 
-saveOrderBtn.addEventListener('click', (e)=>{
-    fetch('/saveorder', {
-        method: 'POST', 
-        headers: {
-            'X-CSRFToken': csrfcookie()
-        }
-    })
-})
+// saveOrderBtn.addEventListener('click', (e)=>{
+//     fetch('/saveorder', {
+//         method: 'POST', 
+//         headers: {
+//             'X-CSRFToken': csrfcookie()
+//         }
+//     })
+// })
 
