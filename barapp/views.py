@@ -15,7 +15,7 @@ def main(request):
         return render(request, 'main.html', { 'categories': categories, 'tab': tab})
     else:
         tabs = Tab.objects.all()
-        return render(request, 'main.html', { tab': tabs})
+        return render(request, 'main.html', { 'tabs': tabs})
 
 def pretty_request(request):
     headers = ''

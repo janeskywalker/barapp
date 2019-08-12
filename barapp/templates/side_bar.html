@@ -18,10 +18,11 @@
         <h3>List of Order:</h3>
     
         <ul id="order-list">
+                {% if tabs %}
                 {% for tab in tabs %}
                 <li>{{tab.name}}</li>
                 {% endfor %}
-           
+                {% endif %}
         </ul>
     
         <div>
@@ -53,6 +54,8 @@
 <section id="current-order" class="list-order tab {% if 'current_tab' in request.session %} show{% endif %}">
         <h3>Current Order:</h3>
 
+        {% if tab %}
+
         <p>{{tab.name}}</p>
 
         <ul id="order-list">
@@ -65,6 +68,7 @@
             {% endfor %}
         </ul>
 
+        {% endif %}
 
         <div class="tab-buttons">
                 <button id="close-tab-btn" class="close-tab">Close Tab</button>
