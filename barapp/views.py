@@ -149,7 +149,7 @@ def addIngredientToOrder(request):
             return JsonResponse({ 'status': 'success' })
     return JsonResponse({ 'status': 'error' })
 
-def searchByName(request):
+def search(request):
     search_result = {}
     if 'drink' in request.GET:
         username = request.GET['drink']

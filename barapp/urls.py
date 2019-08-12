@@ -26,4 +26,7 @@ urlpatterns = [
     # just an endpoint serve  no specific purpose
     path('startorder/<int:tab_pk>', views.startOrder, name='start-order'),
 
+    #cocktailDB API search page
+    path('search/', views.search, name='search'),
+
 ]
