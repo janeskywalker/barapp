@@ -34,6 +34,7 @@ drinkList.addEventListener('click', (e)=>{
                 drink_id: target.dataset['id']
             })
         }).then((response) => {
+            console.log('response: ', response)
             // Render drink to sidebar
         })
     }
@@ -52,9 +53,11 @@ ingredientList.addEventListener('click', (e)=>{
                 'X-CSRFToken': csrfcookie()
             },
             body: JSON.stringify({
-                id: target.dataset['id']
+                ingredient_id: target.dataset['id']
             })
-        }).then((response) => {
+        }).then(async (response) => {
+            console.log('response: ', response)
+            console.log(await response.json())
             // Render drink to sidebar
         })
     }

@@ -9,6 +9,7 @@ urlpatterns = [
     path('startorder/<int:tab_pk>', views.startOrder, name='start-order'),
     path('closetab/<int:tab_pk>', views.closeTab, name='close-tab'),
     path('addDrinkToOrder', views.addDrinkToOrder, name='add-drink'),
+    path('addIngredientToOrder', views.addDrinkToOrder, name='add-ingredient'),
 
 
     # path('drink/', views.build_drink, name='build_drink'),

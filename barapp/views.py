@@ -127,3 +127,15 @@ def addDrinkToOrder(request):
             drink_id = json_obj['drink_id']
             tab.drinks.add(Drink.objects.get(id=drink_id))
             return JsonResponse({ 'status': 'success' })
+    return JsonResponse({ 'status': 'error' })
+
+def addDrinkToOrder(request):
+    if 'current_tab' in request.session:
+        if request.method == 'POST':
+            current_tab = request.session['current_tab']
+            tab = Tab.objects.get(id=current_tab)
+            json_obj = json.loads(request.body)
+            ingredient_id = json_obj['ingredient_id']
+            tab.ingredients.add(Ingredient.objects.get(id=ingredient_id))
+            return JsonResponse({ 'status': 'success' })
+    return JsonResponse({ 'status': 'error' })
