@@ -52,8 +52,8 @@ class Tab(models.Model):
     name = models.CharField(max_length=100)
     open_date_time = models.DateTimeField(auto_now_add=True)
     close_date_time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
-    drinks = models.ManyToManyField(Drink)
-    ingredients = models.ManyToManyField(Ingredient)
+    drinks = models.ManyToManyField(Drink, blank=True, null=True)
+    ingredients = models.ManyToManyField(Ingredient, blank=True, null=True)
 
     def __str__(self):
         return self.name

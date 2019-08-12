@@ -18,7 +18,10 @@
         <h3>List of Order:</h3>
     
         <ul id="order-list">
-            <li></li>
+                {% for tab in tabs %}
+                <li>{{tab.name}}</li>
+                {% endfor %}
+           
         </ul>
     
         <div>
@@ -28,19 +31,7 @@
     
 </section>
 
-<section id="current-order" class="list-order tab {% if 'current_tab' in request.session %} show{% endif %}">
-        <h3>Current Order:</h3>
-    
-        <ul id="order-list">
-            <li></li>
-        </ul>
-    
-        <div>
-            <button id='new-order-btn'>New Order</button>
-        </div>
-    
-    
-</section>
+
 
 <!-- new order -->
 <section id="new-order" class="new-order tab">
@@ -58,12 +49,30 @@
         
 </section> 
 
+<!-- current order -->
+<section id="current-order" class="list-order tab {% if 'current_tab' in request.session %} show{% endif %}">
+        <h3>Current Order:</h3>
+
+        <p>{{tab.name}}</p>
+
+        <ul id="order-list">
+            {% for drink in tab.drinks.all %}
+            <li>{{drink.name}}</li>
+            {% endfor %}
+
+            {% for ingredient in tab.ingredients.all %}
+            <li>{{ingredient.name}}</li>
+            {% endfor %}
+        </ul>
 
 
-<!-- <div class="tab-buttons">
-        <button class="close-tab">Close Tab</button>
-        <button class="save-tab">Save Tab</button>
-</div> -->
+        <div class="tab-buttons">
+                <button id="close-tab-btn" class="close-tab">Close Tab</button>
+                <button id="save-order-btn" class="save-tab">Save Tab</button>
+        </div>
+    
+</section>
+
 
 
 <script src="/static/scripts/side_bar.js"></script>

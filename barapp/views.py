@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 import datetime
+from django.http import JsonResponse
 
 # Create your views here.
 def main(request):
@@ -9,8 +10,12 @@ def main(request):
     current_tab = 0
     if 'current_tab' in request.session:
         current_tab = request.session['current_tab']
-    print(current_tab)
-    return render(request, 'main.html', {'categories': categories, 'current_tab': current_tab})
+        print(current_tab)
+        tab = Tab.objects.get(id=current_tab)
+        return render(request, 'main.html', { 'categories': categories, 'tab': tab})
+    else:
+        tabs = Tab.objects.all()
+        return render(request, 'main.html', { tab': tabs})
 
 def pretty_request(request):
     headers = ''
@@ -52,7 +57,7 @@ def category(request, category_pk):
     return render(request, 'category.html', {'drinks': drinks, 'ingredients': ingredients})
 
 
-def neworder(request):
+def newOrder(request):
     if request.method == 'POST':
         customername = request.POST['customername']
         tab = Tab(name = customername, open_date_time = datetime.datetime.now())
@@ -63,3 +68,7 @@ def neworder(request):
 
         return redirect('main')
         
+def saveOrder(request):
+    if 'current_tab' in request.session:
+        del request.session['current_tab']
+    return JsonResponse({'status': 'success'})
