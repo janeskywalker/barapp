@@ -12,19 +12,19 @@
             </header>
 
             <!-- show drink -->
-            <ul class="item-list drink-list">
+            <ul id="drink-list" class="item-list drink-list">
             {% for drink in drinks %}
             
-                <li>{{drink.name}}</li>
+                <li><button data-id="{{drink.id}}">{{drink.name}}</button></li>
             
             {% endfor %}
             </ul>
             
-            <ul class="item-list ingredient-list hide">
+            <ul id="ingredient-list" class="item-list ingredient-list hide">
             {% for ingredient in ingredients %}
             <!-- show ingredients -->
 
-                    <li>{{ingredient.name}}</li>
+                    <li><button data-id="{{ingredient.id}}">{{ingredient.name}}</button></li>
             
             {% endfor %}
             </ul>

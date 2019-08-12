@@ -1,10 +1,10 @@
 
 
 const drinkButton = document.querySelector('.drink-button')
-const drinkList = document.querySelector('.drink-list')
+const drinkList = document.querySelector('#drink-list')
 
 const ingredientButton = document.querySelector('.ingredient-button')
-const ingredientList = document.querySelector('.ingredient-list')
+const ingredientList = document.querySelector('#ingredient-list')
 
 
 drinkButton.addEventListener('click', (e)=>{
@@ -16,6 +16,27 @@ drinkButton.addEventListener('click', (e)=>{
 ingredientButton.addEventListener('click', (e)=>{
     ingredientList.classList.remove('hide')
     drinkList.classList.add('hide')
+})
+
+drinkList.addEventListener('click', (e)=>{
+    const target = e.target
+    console.log('target: ', target)
+    if (target.dataset['id']) {
+        console.log(target.dataset['id'])
+
+        fetch('/addDrinkToOrder', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfcookie()
+            },
+            body: JSON.stringify({
+                id: target.dataset['id']
+            })
+        }).then((response) => {
+            // Render drink to sidebar
+        })
+    }
 })
 
 

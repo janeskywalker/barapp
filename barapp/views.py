@@ -1,7 +1,20 @@
 from django.shortcuts import render, redirect
 from .models import *
+from functools import reduce
 import datetime
 from django.http import JsonResponse
+
+def priceForIngredients(ingredients):
+    price = 0
+    for ing in ingredients:
+        price = price + ing['price']
+    return price
+
+def findDrinkPrice(drink):
+    return {
+        'name': drink.name,
+        'price': priceForIngredients(list(drink.ingredients.values()))
+    }
 
 # Create your views here.
 def main(request):
@@ -10,9 +23,13 @@ def main(request):
     current_tab = 0
     if 'current_tab' in request.session:
         current_tab = request.session['current_tab']
-        print(current_tab)
         tab = Tab.objects.get(id=current_tab)
-        return render(request, 'main.html', { 'categories': categories, 'tab': tab})
+        drinks = list(map(findDrinkPrice, list(tab.drinks.all())))
+        return render(request, 'main.html', { 'categories': categories, 'tab': {
+            'name': tab.name,
+            'drinks': drinks,
+            'ingredients': tab.ingredients
+        }})
     else:
         tabs = Tab.objects.all()
         return render(request, 'main.html', { 'categories': categories, 'tabs': tabs})
@@ -56,7 +73,12 @@ def category(request, category_pk):
         current_tab = request.session['current_tab']
         print(current_tab)
         tab = Tab.objects.get(id=current_tab)
-        return render(request, 'category.html', { 'tab': tab, 'drinks': drinks, 'ingredients': ingredients})
+        drinks = list(map(findDrinkPrice, list(tab.drinks.all())))
+        return render(request, 'category.html', { 'drinks': drinks, 'ingredients': ingredients, 'tab': {
+            'name': tab.name,
+            'drinks': drinks,
+            'ingredients': tab.ingredients
+        }})
     else:
         tabs = Tab.objects.all()
         return render(request, 'category.html', { 'tabs': tabs, 'drinks': drinks, 'ingredients': ingredients})
