@@ -5,36 +5,7 @@ import datetime
 import json
 from django.http import JsonResponse
 
-def priceForIngredients(ingredients):
-    price = 0
-    for ing in ingredients:
-        price = price + ing['price']
-    return price
-
-def findDrinkPrice(drink):
-    return {
-        'name': drink.name,
-        'price': priceForIngredients(list(drink.ingredients.values()))
-    }
-
-
-def main(request):
-    categories = Category.objects.all()
-    print(categories)
-    current_tab = 0
-    if 'current_tab' in request.session:
-        current_tab = request.session['current_tab']
-        tab = Tab.objects.get(id=current_tab)
-        drinks = list(map(findDrinkPrice, list(tab.drinks.all())))
-        return render(request, 'main.html', { 'categories': categories, 'tab': {
-            'name': tab.name,
-            'drinks': drinks,
-            'ingredients': tab.ingredients
-        }})
-    else:
-        tabs = Tab.objects.all()
-        return render(request, 'main.html', { 'categories': categories, 'tabs': tabs})
-
+# nothing important, keep scrolling
 def pretty_request(request):
     headers = ''
     for header, value in request.META.items():
@@ -57,17 +28,50 @@ def pretty_request(request):
         body=request.body,
     )
 
-def build_drink(request):
-    return render(request, 'build_drink.html', {'categoryClicked': categoryClicked})
+
+def priceForIngredients(ingredients):
+    price = 0
+    for ing in ingredients:
+        price = price + ing['price']
+    return price
+
+def findDrinkPrice(drink):
+    return {
+        'name': drink.name,
+        'price': priceForIngredients(list(drink.ingredients.values()))
+    }
 
 
+# main page, grab all 9 categories from db and display, 
+# if there is current tab, set session, list that customer's drink. 
+# If no current tab, grab all tabs(customers) and display
+def main(request):
+    categories = Category.objects.all()
+    print(categories)
+    current_tab = 0
+    if 'current_tab' in request.session:
+        current_tab = request.session['current_tab']
+        tab = Tab.objects.get(id=current_tab)
+        drinks = list(map(findDrinkPrice, list(tab.drinks.all())))
+        return render(request, 'main.html', { 'categories': categories, 'tab': {
+            'name': tab.name,
+            'drinks': drinks,
+            'ingredients': tab.ingredients
+        }})
+    else:
+        tabs = Tab.objects.all()
+        return render(request, 'main.html', { 'categories': categories, 'tabs': tabs})
+
+
+# category page showing customer name, in session, close and save btn, grab draink and ingredients from that category and display
+# if there is current tab, set session, list that customer's drink. 
+# If no current tab, grab all tabs(customers) and display
 def category(request, category_pk):
     drinks = Drink.objects.filter(category_id=category_pk)
     print("drinks:", drinks)
     ingredients = Ingredient.objects.filter(category_id=category_pk)
     print("ingredients:", ingredients)
 
-    # return render(request, 'category.html', {'drinks': drinks, 'ingredients': ingredients})
 
     current_tab = 0
     if 'current_tab' in request.session:
@@ -85,6 +89,7 @@ def category(request, category_pk):
         return render(request, 'category.html', { 'tabs': tabs, 'drinks': drinks, 'ingredients': ingredients})
 
 
+# after user press sumbit new order btn, we save the customer name to db, set session to this current customer
 def newOrder(request):
     if request.method == 'POST':
         customername = request.POST['customername']
@@ -96,19 +101,20 @@ def newOrder(request):
 
         return redirect('main')
         
+# kill current session
 def saveOrder(request, tab_pk):
     if 'current_tab' in request.session:
         del request.session['current_tab']
     return redirect('main')
 
-
+# just an endpoint 
 def startOrder(request, tab_pk):
         print(tab_pk)
         request.session['current_tab'] = tab_pk
         # return JsonResponse({'status': 'success'})
         return redirect('main')
 
-
+# insert close time to current tab, close current session
 def closeTab(request, tab_pk):
         print(tab_pk)
         tab = Tab.objects.get(id=tab_pk)
@@ -118,6 +124,7 @@ def closeTab(request, tab_pk):
             del request.session['current_tab']
         return redirect('main')
 
+# add drink to db for current session
 def addDrinkToOrder(request):
     if 'current_tab' in request.session:
         if request.method == 'POST':
@@ -129,7 +136,8 @@ def addDrinkToOrder(request):
             return JsonResponse({ 'status': 'success' })
     return JsonResponse({ 'status': 'error' })
 
-def addDrinkToOrder(request):
+# add ingredient to db for current session
+def addIngredientToOrder(request):
     if 'current_tab' in request.session:
         if request.method == 'POST':
             current_tab = request.session['current_tab']
@@ -139,3 +147,5 @@ def addDrinkToOrder(request):
             tab.ingredients.add(Ingredient.objects.get(id=ingredient_id))
             return JsonResponse({ 'status': 'success' })
     return JsonResponse({ 'status': 'error' })
+
+

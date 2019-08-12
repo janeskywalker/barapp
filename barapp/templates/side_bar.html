@@ -1,19 +1,9 @@
-<!-- <div class="tab">
-    <h4>Order</h4>
-    <div id='tab-display'></div>
-    <div id='sub-total'></div>
-    <section class="tab-buttons">
-        <button class="close-tab {{user.id}}">Close Tab</button>
-        <button class="save-tab">Save Tab</button>
-    </section>
-</div>
- -->
 
 
 
 
-
-<!-- list order -->
+<!-- list of customers and new order button -->
+<!-- not in session -->
 <section id="list-order" class="list-order tab {% if 'current_tab' not in request.session %} show{% endif %}">
         <h3>List of Order:</h3>
     
@@ -34,7 +24,7 @@
 
 
 
-<!-- new order -->
+<!-- new order form, severed by js-->
 <section id="new-order" class="new-order tab">
 
     <form action="{% url 'new-order' %}" method="POST" class="new-order-form">
@@ -50,7 +40,10 @@
         
 </section> 
 
+
+
 <!-- current order -->
+<!-- in session -->
 <section id="current-order" class="list-order tab {% if 'current_tab' in request.session %} show{% endif %}">
         <h3>Current Order:</h3>
 

@@ -6,18 +6,19 @@ const drinkList = document.querySelector('#drink-list')
 const ingredientButton = document.querySelector('.ingredient-button')
 const ingredientList = document.querySelector('#ingredient-list')
 
-
+// hide and show drink/ingredients list 
 drinkButton.addEventListener('click', (e)=>{
     drinkList.classList.remove('hide')
     ingredientList.classList.add('hide')
 })
 
-
+// hide and show drink/ingredients list 
 ingredientButton.addEventListener('click', (e)=>{
     ingredientList.classList.remove('hide')
     drinkList.classList.add('hide')
 })
 
+// on click of drink and ingredient btn, item get to be added to db
 drinkList.addEventListener('click', (e)=>{
     const target = e.target
     console.log('target: ', target)
