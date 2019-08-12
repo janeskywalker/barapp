@@ -172,3 +172,8 @@ p {
         justify-items: center;
     }
 }
+
+.recipes {
+    padding: 30px;
+    margin: 30px;
+}

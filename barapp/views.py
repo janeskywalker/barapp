@@ -151,18 +151,22 @@ def addIngredientToOrder(request):
 
 def search(request):
     search_result = {}
-    if 'drink' in request.GET:
-        username = request.GET['drink']
-        url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=%s' % drink
-        response = requests.get(url)
-        search_was_successful = (response.status_code == 200)  # 200 = SUCCESS
-        search_result = response.json()
-        search_result['success'] = search_was_successful
-    elif 'ingredient' in request.GET:
-        username = request.GET['drink']
-        url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=%s' % ingredient
-        response = requests.get(url)
-        search_was_successful = (response.status_code == 200)  # 200 = SUCCESS
-        search_result = response.json()
-        search_result['success'] = search_was_successful
-    return render(request, 'search_return.html', {'search_result': search_result})
+    if request.POST:
+        if (request.POST['select-search'][0]):
+            drink = request.POST['search-term'][0]
+            url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=%s' % drink
+            response = requests.get(url)
+            search_was_successful = (response.status_code == 200)  
+            search_result = response.json()
+            search_result['success'] = search_was_successful
+            return render(request, 'search_return.html', {'search_result': search_result})
+        elif (request.GET['select-search'][1]):
+            ingredient = request.POST['search-term'][0]
+            url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=%s' % ingredient
+            response = requests.get(url)
+            search_was_successful = (response.status_code == 200) 
+            search_result = response.json()
+            search_result['success'] = search_was_successful
+            return render(request, 'search_return.html', {'search_result': search_result})
+    else: 
+        return render(request, 'search_return.html', {'search_result': search_result})

@@ -1,20 +1,74 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <form method="get">
-    <input type="text" name="drink" placeholder='drink'>
-    <input type="text" name="ingredient" placeholder='ingredient'>
+  <form method="post" action="{% url 'search' %}">
+      {% csrf_token %}
+    <input type="text" name="search-term" placeholder='Drink or Ingredient Name'><br/>
+    <input type="radio" name="select-search" value="drink"> Search for a Drink by Name<br>
+<input type="radio" name="select-search" value="ingredient"> Search for Drinks by Ingredient<br>
     <button type="submit">search</button>
   </form>
   {% if search_result %}
     {% if search_result.success %}
-      <p>
-        <strong>{{ search_result.name|default_if_none:search_result.login }}</strong> has
-        <strong>{{ search_result.public_repos }}</strong> public repositories.
-      </p>
+        
+        {% for drink in search_result.drinks %}  
+            <p class='recipes'>
+                <b>{{ drink.strDrink}}</b><br/>
+                Pour in a {{ drink.strGlass|lower }}.<br/>
+                {% if drink.strIngredient1 != "" %}
+                    {{ drink.strIngredient1 }} {{ drink.strMeasure1 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient2 != "" %}
+                    {{ drink.strIngredient2 }} {{ drink.strMeasure2 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient3 != "" %}
+                    {{ drink.strIngredient3 }} {{ drink.strMeasure3 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient4 != "" %}
+                    {{ drink.strIngredient4 }} {{ drink.strMeasure4 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient5 != "" %}
+                    {{ drink.strIngredient5 }} {{ drink.strMeasure5 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient6 != "" %}
+                    {{ drink.strIngredient6 }} {{ drink.strMeasure6 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient7 != "" %}
+                    {{ drink.strIngredient7 }} {{ drink.strMeasure7 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient8 != "" %}
+                    {{ drink.strIngredient8 }} {{ drink.strMeasure8 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient9 != "" %}
+                    {{ drink.strIngredient9 }} {{ drink.strMeasure9 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient10 != "" %}
+                    {{ drink.strIngredient10 }} {{ drink.strMeasure10 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient11 != "" %}
+                    {{ drink.strIngredient11 }} {{ drink.strMeasure11 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient12 != "" %}
+                    {{ drink.strIngredient12 }} {{ drink.strMeasure12 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient13 != "" %}
+                    {{ drink.strIngredient13 }} {{ drink.strMeasure13 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient14 != "" %}
+                    {{ drink.strIngredient14 }} {{ drink.strMeasure14 }}<br/>
+                {% endif %}
+                {% if drink.strIngredient15 != "" %}
+                    {{ drink.strIngredient15 }} {{ drink.strMeasure15 }}<br/>
+                {% endif %}
+                <br/><br/>
+                {{ drink.strInstructions}}<br/>
+            </p>
+        {% endfor %}
+        <br/><br/>
+      
     {% else %}
       <p><em>{{ search_result.message }}</em></p>
     {% endif %}
-    <p>Rate limit: {{ search_result.rate.remaining }}/{{ search_result.rate.limit }}</p>
   {% endif %}
+
 {% endblock %}
