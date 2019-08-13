@@ -6,11 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <script src="/static/scripts/ajax_utils.js"></script>
     <title>BarApp</title>
 </head>
 <body>
 
+    <header>
+        <h1>BarApp</h1>
+        <h2>Welcome {{user.username}}!</h2>
+        <a href='accounts/logout/' id='logoutButton'>
+        <button class='nav-buttons' id='logoutButton'>Log Out</button></a>
+
+        <a href='/search' id='searchPageButton'>
+        <button class='nav-buttons' id='drinkSearchButton'>Find Drink Recipes</button></a>
+        <a href='/categories' id='searchPageButton'>
+            <button class='hidden nav-buttons' id='drinkSearchButton'>Order Entry</button></a>
+    </header>
+
 {% block content %}
+
+
+
+
+
 {% endblock %}
 
 

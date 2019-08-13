@@ -2,77 +2,219 @@
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    box-sizing: border-box;
+    text-decoration: none;
 }
 
 body {
-    background: rgb(250, 187, 28);
+    background: #eee;
+}
+
+a {
+    color: black
+}
+
+p.recipes {
+    background: rgb(179, 179, 179);
+    border-radius: 20px;
+    box-shadow: -5px -2px 10px inset; 
+}
+
+.drink-name {
+    font-size: 1.3em;
+}
+
+form.search, form.login-form {
+    margin: 30px 0 0 20px;
+}
+
+input.login {
+    padding: 2px;
+    margin: 5px;
+}
+
+li {
+    list-style: none;
+}
+
+button {
+    padding: 2px 5px;
+    border-radius: 20px;
+}
+
+header {
+    padding: 10px 5px 5px 20px;
+    width: 40vw;
+ 
+}
+
+.welcome {
+    padding: 20px;
+    background: rgb(126, 126, 126);
+    border-radius: 20px;
+    max-width: 60vw;
+    min-width: max-content;
+}
+
+p.welcome {
+    padding: 10px 0;
+}
+
+a.welcome {
+    background: rgb(63, 63, 63);
+    color: white;
+    border-radius: 20px;
+    padding: 2px 5px;
+    margin: 20px 10px 0 0;
 }
 
 .container {
     display: grid;
-    grid-template-areas:    'head head'
-                            'cat drink'
-                            'cat tab'
-                            'foot tab';
     grid-template-columns: 3fr 1.5fr;
-    grid-template-rows: 100px 1fr 1fr 50px;
     /* justify-items: center; */
     grid-auto-rows: minmax(100px, auto);
 }
 
 .cats {
     display: grid;
-    grid-area: cat;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-left:30px;
-
+    padding: 10px;
 }
 
-.category {
+div.category {
     display: relative;
     height: 150px;
     width: 150px;
-    background: rgb(221, 222, 213);
     margin: 10px;
     border-radius: 20px;
-    text-align: center;  
+    text-align: center; 
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.30);
+    box-shadow: -5px -2px 10px inset; 
+
+    
+}
+
+.whiskey {
+    background: rgb(218, 161, 118);
+    background-image: linear-gradient(rgb(218, 161, 118), rgb(104, 79, 59));
+    
+}
+
+.vodka {
+    background: rgb(202, 220, 255);
+    background-image: linear-gradient(rgb(202, 220, 255), rgb(67, 110, 196));
+}
+
+.rum {
+    background: rgb(243, 217, 114);
+    background-image: linear-gradient(rgb(243, 217, 114), rgb(255, 217, 65));
+}
+
+.beer {
+    background: rgb(245, 212, 128);
+    background-image: linear-gradient(rgb(240, 203, 109), rgb(196, 142, 5));
+}
+
+.wine {
+    background: rgb(211, 140, 134);
+    background-image: linear-gradient(rgb(211, 140, 134), rgb(114, 14, 7));
+}
+
+.tequila {
+    background: rgb(184, 255, 140);
+    background-image: linear-gradient(rgb(184, 255, 140), rgb(67, 131, 27));
+}
+
+.mixer {
+    background: rgb(201, 117, 254);
+    background-image: linear-gradient(rgb(201, 117, 254), rgb(84, 18, 126));
+}
+
+.gin {
+    background: rgb(156, 255, 187);
+    background-image: linear-gradient(rgb(156, 255, 187), rgb(63, 99, 88));
+}
+
+.liquor {
+    background: rgb(255, 188, 188);
+    background-image: linear-gradient(rgb(255, 188, 188), rgb(148, 111, 111));
+}
+
+h3.category {
+    text-decoration: none;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+#listorder {
+    padding: 20px 0 0 0;
+    border-radius: 20px 20px 0 0;
+}
+
+.order-list {
+    line-height: 1rem;
+    padding: 20px 0 0 0;
+}
+
+.total {
+    margin-left: 5px;
 }
 
 .tab {
-    display: grid;
-    grid-area: tab;
-    height: max-content;
-    width: 250px;
-    background: rebeccapurple;
-    padding: 10px;
+    display: none;
+    background: #999;
+    padding: 0 5px 5px 5px;
+    margin-top: 20px;
     border-radius: 20px 20px 0 0;
+    height: max-content;
     align-self: end;
-    z-index: 2;
+}
+
+.list-order {
+    padding: 0 0 5px 5px;
+}
+
+.tab.show {
+    display: grid;
 }
 
 .tab-buttons {
-    margin: 10px;
-    padding: 30px 0 30px 20px;
+    padding: 30px 0;
     align-items: center;
     justify-items: center;
 }
 
-.close-tab, .save-tab {
-    padding: 5px;
+#save-order-btn, #close-tab-btn {
+    padding: 2px 5px;
     border-radius: 20px;
+    margin-left: 5px;
 }
 
-.close-tab {
-    background-color: rgb(46, 174, 0)
+#close-tab-btn {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: 1px solid black;
 }
 
-.save-tab {
-    background-color: rgb(216, 101, 0)
+#save-order-btn {
+    background-color: #999;
+    color: black;
+    border: 1px solid black;
+}
+
+p.tab-name {
+    padding-left: 5px;
 }
 
 h3 {
     display: absolute;
     line-height: 150px;
+}
+
+h3.list-order {
+    line-height: 1rem;
+    padding-top: 20px;
 }
 
 .head {
@@ -87,9 +229,9 @@ h1 {
 }
 
 .create-order {
-    background: rgb(130, 249, 126);
+    background: rgb(100, 130, 240);
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 3px;
     margin-top:20px;
 
 }
@@ -102,22 +244,14 @@ h6 {
     padding: 5px 0 0 30px;
 }
 
-@media screen and (max-width: 600px) {
-    .container {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr 2fr;
-    justify-items: center;
-    }
-}
-
-p {
-    background: hotpink;
+.current-order-list {
+    list-style: none;
+    background: #ccc;
 }
 
 
-.wrapper{
-    background: rgb(250, 187, 28);
+.wrapper {
+    background: #eee;
     z-index: 1;
     display: grid;
     grid-column: 1 / 3;
@@ -126,10 +260,6 @@ p {
                             'cat-view mix blank';
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-}
-
-.hidden {
-    display: none;
 }
 
 .category-view {
@@ -146,8 +276,61 @@ p {
 
 .drink {
     grid-area: drink-view;
-    background: plum;
+    background: #ccc;
     width: 250px;
     padding: 10px;
     border-radius: 20px;
+}
+
+
+/* my css */
+
+.hide {
+    display: none 
+}
+
+.item-list {
+    padding: 20px;
+    list-style-type: none;
+}
+
+.item-button{
+    -webkit-appearance: none;
+    display:inline-block;
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    padding: 10px;
+    width: 50%;
+}
+
+.drink-ingredients-panel {
+    border: solid pink 2px;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr 2fr;
+        justify-items: center;
+    }
+}
+
+.recipes {
+    padding: 30px;
+    margin: 20px;
+}
+    
+input.search {
+    padding: 2px 5px;
+    margin: 5px 0;
+    width: 20vw;
+}
+
+button.search {
+    margin-top: 10px;
+}
+
+form.new-order {
+    padding: 5px;
 }

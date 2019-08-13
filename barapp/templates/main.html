@@ -1,58 +1,24 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
-
 
 {% block content %}
 
-    <section class="container">
-        <section class="head">
-            <h1>BarApp</h1>
-            <p>Welcome {{user.username}}!</p>
-            <button class="create-order">Start New Order</button>
-        </section>
+    <main class="container">
         <!-- categories  -->
         <section id='category-panel' class="cats">
             {% for category in categories %}
-                <div class="category">
-                    <h3>{{category.type}}</h3>
-                </div>
+                <a href="category/{{category.id}}">
+                    <div class="category {{category.name}}">
+                        <h3 class="category">{{category.name}}</h3>
+                    </div>
+                </a>
             {% endfor %}
         </section>
+
         <!-- receipt -->
-        <div class="tab">
-            <h4>Order</h4>
+        {% include 'side_bar.html' %}
+        
+    </main>
 
-            <div id='tab-display'></div>
-            <div id='sub-total'></div>
-            <section class="tab-buttons">
-                <button class="close-tab {{user.id}}">Close Tab</button>
-                <button class="save-tab">Save Tab</button>
-            </section>
+    <!-- <script src="static/scripts.js"></script> -->
 
-        </div>
-        {% for category in categories %}
-            <section class="wrapper hidden {{category.type}}">
-                <section class="category-view">
-                    {{category.type}}
-                    {% for ingredient in category.data %}
-                        <p class="{{ingredient.price}}">{{ingredient.name}}</p>
-                        
-                    {% endfor %}
-                </section>
-                <section class="mixers">
-
-                </section>
-                <section class="drink">
-                        <h1>Drink</h1>
-                        <div class="drink-display"></div>
-
-                        <button class="save-drink">Save Drink</button>
-                </section>
-            </section>
-        {% endfor %}
-    </section>
-
-
-    <script src="static/scripts.js"></script>
-
-    {% endblock %}
+{% endblock %}

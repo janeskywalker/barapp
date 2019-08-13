@@ -1,0 +1,93 @@
+
+
+
+
+<!-- list of customers and new order button -->
+<!-- not in session -->
+<!-- tabs got sent back from server -->
+<section id="list-order" class="list-order tab {% if 'current_tab' not in request.session %} show{% endif %}">
+        <h3 class="order-list">Order:</h3>
+    
+        <ul id="order-list">
+                {% if tabs %}
+                {% for tab in tabs %}
+                <li><a href="/startorder/{{tab.id}}" class="customer-link" data-id="{{tab.id}}">{{tab.name}}</a></li>
+                {% endfor %}
+                {% endif %}
+        </ul>
+    
+        <div>
+            <button id='new-order-btn'>New Order</button>
+        </div>
+    
+    
+</section>
+
+
+
+<!-- new order form, severed by js-->
+<section id="new-order" class="new-order tab">
+
+    <form class="new-order" action="{% url 'new-order' %}" method="POST" class="new-order-form">
+            {% csrf_token %}
+
+            <p class="new-order">
+                <label for="Customer Name">Customer Name</label>
+                <input type="text" name="customername" required maxlength="25" minlength="2" />
+            </p>
+
+            <button type="submit">Submit new order</button>
+    </form>
+        
+</section> 
+
+
+
+<!-- current order -->
+<!-- in session -->
+<!-- tab got sent back from server-->
+<section id="current-order" class="list-order tab {% if 'current_tab' in request.session %} show {% endif %}">
+        <h3 class='list-order'>Current Order:</h3>
+
+        {% if tab %}
+
+        <p class='tab-name'>{{tab.name}}</p>
+
+        <ul id="current-order-list" class="current-order-list">
+            {% for drink in tab.drinks %}
+            <li class="order-item">
+                <p>Drink: {{drink.name}}</p>
+                <p>Price: ${{drink.price}}</p>
+            </li>
+            {% endfor %}
+
+            {% for ingredient in tab.ingredients.all %}
+            <li class="order-item">
+                <p>Drink: {{ingredient.name}}</p>
+                <p>Price: ${{ingredient.price}}</p>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <p class="total" id='current-order-total'>Total: $<span id="current-total-value">{{tab.total}}</span></p>
+
+        {% endif %}
+        
+        <div class="tab-buttons">
+                <a href="/closetab/{{tab.id}}" id="close-tab-btn" class="close-tab">Close Tab</a>
+
+                <a href="/saveorder/{{tab.id}}" id="save-order-btn" class="save-order">Save Tab</a>
+
+        </div>
+
+   
+    
+</section>
+
+
+
+<script src="/static/scripts/side_bar.js"></script>
+
+
+
+

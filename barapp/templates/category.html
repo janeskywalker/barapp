@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <main class="container">
+
+        <!-- drink/ingredients  -->
+        <div class="drink-ingredients-panel">
+
+            <header class="drink-ingredients-header">
+                <button class="item-button drink-button">Drinks</button><button class="item-button ingredient-button">ingredients</button>
+            </header>
+
+            <!-- show drink -->
+            <ul id="drink-list" class="item-list drink-list">
+            {% for drink in drinks %}
+            
+                <li><button data-id="{{drink.id}}">{{drink.name}}</button></li>
+            
+            {% endfor %}
+            </ul>
+            
+            <ul id="ingredient-list" class="item-list ingredient-list hide">
+            {% for ingredient in ingredients %}
+            <!-- show ingredients -->
+
+                    <li><button data-id="{{ingredient.id}}">{{ingredient.name}}</button></li>
+            
+            {% endfor %}
+            </ul>
+
+        </div>
+
+
+        <!-- receipt -->
+        {% include 'side_bar.html' %}
+        
+    </main>
+
+    <script src="/static/scripts/category.js"></script>
+
+{% endblock %}
