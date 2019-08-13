@@ -74,7 +74,7 @@ def main(request):
             'total': getOrderTotal(drinks, list(tab.ingredients.values()))
         }})
     else:
-        tabs = Tab.objects.all()
+        tabs = Tab.objects.filter(close_date_time__isnull=True)
         return render(request, 'main.html', { 'categories': categories, 'tabs': tabs})
 
 
@@ -102,7 +102,7 @@ def category(request, category_pk):
             'total': getOrderTotal(tabDrinks, list(tab.ingredients.values()))
         }})
     else:
-        tabs = Tab.objects.all()
+        tabs = Tab.objects.filter(close_date_time__isnull=True)
         return render(request, 'category.html', { 'tabs': tabs, 'drinks': drinks, 'ingredients': ingredients})
 
 
