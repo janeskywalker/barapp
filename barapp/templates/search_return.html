@@ -3,9 +3,9 @@
 {% block content %}
   <form method="post" action="{% url 'search' %}">
       {% csrf_token %}
-    <input type="text" name="search-term" placeholder='Drink or Ingredient Name'><br/>
-    <input type="radio" name="select-search" value="drink"> Search for a Drink by Name<br>
-<input type="radio" name="select-search" value="ingredient"> Search for Drinks by Ingredient<br>
+    <input type="text" name="search-term" placeholder='Drink or Ingredient Name' required><br/>
+    <input type="radio" name="select-search" value="drink" required> Search for a Drink by Name<br>
+<input type="radio" name="select-search" value="ingredient" required> Search for Drinks by Ingredient<br>
     <button type="submit">search</button>
   </form>
   {% if search_result %}
