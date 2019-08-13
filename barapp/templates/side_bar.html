@@ -56,8 +56,7 @@
         <ul id="current-order-list" class="current-order-list">
             {% for drink in tab.drinks %}
             <li class="order-item">
-                <p>Drink: {{drink.name}}</p>
-                <p>Price: ${{drink.price}}</p>
+                <p>{{drink.name}}   ${{drink.price}}</p>
             </li>
             {% endfor %}
 
