@@ -2,8 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('', views.home, name='home'),
+
     # main page, either in session or no session
-    path('', views.main, name='main'),
+    path('categories', views.main, name='main'),
 
     # user click on new order btn to create new order
     path('neworder', views.newOrder, name='new-order'),

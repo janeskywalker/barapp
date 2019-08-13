@@ -54,6 +54,9 @@ def getOrderTotal(drinks, ingredients):
     return total
     
 
+def home(request):
+    return render(request, 'home.html')
+
 # main page, grab all 9 categories from db and display, 
 # if there is current tab, set session, list that customer's drink. 
 # If no current tab, grab all tabs(customers) and display
