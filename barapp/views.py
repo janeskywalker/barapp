@@ -83,6 +83,7 @@ def category(request, category_pk):
         tab = Tab.objects.get(id=current_tab)
         tabDrinks = list(map(findDrinkPrice, list(tab.drinks.all())))
         return render(request, 'category.html', { 'drinks': drinks, 'ingredients': ingredients, 'tab': {
+            'id': tab.id,
             'name': tab.name,
             'drinks': tabDrinks,
             'ingredients': tab.ingredients
@@ -100,14 +101,20 @@ def addDrinkToOrder(request):
             current_tab = request.session['current_tab']
             # with id go grab the current tab
             tab = Tab.objects.get(id=current_tab)
+            print(tab)
+            print(tab.drinks.all())
+
             # grab requst body, which is a json object
             json_obj = json.loads(request.body)
             # extract the drink_id
             drink_id = json_obj['drink_id']
-            # add the new drink to tab
-            tab.drinks.add(Drink.objects.get(id=drink_id))
 
-            newDrink = findDrinkPrice(Drink.objects.get(id=drink_id))
+            drink = Drink.objects.get(id=drink_id)
+
+            # add the new drink to tab
+            tab.drinks.add(drink)
+
+            newDrink = findDrinkPrice(drink)
             print(newDrink)
  
             return JsonResponse(newDrink)
@@ -123,8 +130,12 @@ def addIngredientToOrder(request):
             tab = Tab.objects.get(id=current_tab)
             json_obj = json.loads(request.body)
             ingredient_id = json_obj['ingredient_id']
-            tab.ingredients.add(Ingredient.objects.get(id=ingredient_id))
-            return JsonResponse({ 'status': 'success' })
+            drink = Ingredient.objects.get(id=ingredient_id)
+            tab.ingredients.add(drink)
+            return JsonResponse({
+                'name': drink.name,
+                'price': drink.price
+            })
     return JsonResponse({ 'status': 'error' })
 
 

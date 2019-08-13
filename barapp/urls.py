@@ -14,7 +14,7 @@ urlpatterns = [
     # user click on drink and ingredient item button to add to order
     path('addDrinkToOrder', views.addDrinkToOrder, name='add-drink'),
 
-    path('addIngredientToOrder', views.addDrinkToOrder, name='add-ingredient'),
+    path('addIngredientToOrder', views.addIngredientToOrder, name='add-ingredient'),
 
 
     # user click on save order to save order
