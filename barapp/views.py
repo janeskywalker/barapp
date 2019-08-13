@@ -43,6 +43,16 @@ def findDrinkPrice(drink):
         'price': priceForIngredients(list(drink.ingredients.values()))
     }
 
+def getOrderTotal(drinks, ingredients):
+    total = 0
+    for drink in drinks:
+        total = total + drink['price']
+
+    for ing in ingredients:
+        total = total + ing['price']
+
+    return total
+    
 
 # main page, grab all 9 categories from db and display, 
 # if there is current tab, set session, list that customer's drink. 
@@ -55,11 +65,13 @@ def main(request):
         current_tab = request.session['current_tab']
         tab = Tab.objects.get(id=current_tab)
         drinks = list(map(findDrinkPrice, list(tab.drinks.all())))
+        print(getOrderTotal(drinks, list(tab.ingredients.values())))
         return render(request, 'main.html', { 'categories': categories, 'tab': {
             'id': tab.id,
             'name': tab.name,
             'drinks': drinks,
-            'ingredients': tab.ingredients
+            'ingredients': tab.ingredients,
+            'total': getOrderTotal(drinks, list(tab.ingredients.values()))
         }})
     else:
         tabs = Tab.objects.all()
@@ -86,7 +98,8 @@ def category(request, category_pk):
             'id': tab.id,
             'name': tab.name,
             'drinks': tabDrinks,
-            'ingredients': tab.ingredients
+            'ingredients': tab.ingredients,
+            'total': getOrderTotal(tabDrinks, list(tab.ingredients.values()))
         }})
     else:
         tabs = Tab.objects.all()

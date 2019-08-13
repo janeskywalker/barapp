@@ -53,7 +53,7 @@
 
         <p>{{tab.name}}</p>
 
-        <ul id="current-order-list">
+        <ul id="current-order-list" class="current-order-list">
             {% for drink in tab.drinks %}
             <li class="order-item">
                 <p>Drink: {{drink.name}}</p>
@@ -69,8 +69,10 @@
             {% endfor %}
         </ul>
 
-        {% endif %}
+        <p id='current-order-total'>Total: $<span id="current-total-value">{{tab.total}}</span></p>
 
+        {% endif %}
+        
         <div class="tab-buttons">
                 <a href="/closetab/{{tab.id}}" id="close-tab-btn" class="close-tab">Close Tab</a>
 

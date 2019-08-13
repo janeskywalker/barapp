@@ -94,9 +94,8 @@ h6 {
     padding: 5px 0 0 30px;
 }
 
-
-
-p {
+.current-order-list {
+    list-style: none;
     background: #ccc;
 }
 

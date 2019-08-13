@@ -8,6 +8,8 @@ const orderItem = document.querySelector('.order-item')
 const ingredientButton = document.querySelector('.ingredient-button')
 const ingredientList = document.querySelector('#ingredient-list')
 
+const currentTotalValue = document.querySelector('#current-total-value')
+
 // hide and show drink/ingredients list 
 drinkButton.addEventListener('click', (e)=>{
     drinkList.classList.remove('hide')
@@ -28,6 +30,12 @@ function addDrinkToList(newDrink) {
             <p>Price: $${newDrink.price}</p>
         </li>
     `
+
+    console.log(currentTotalValue.innerText)
+    const oldValue = parseInt(currentTotalValue.innerText)
+    const newValue = oldValue + newDrink.price
+
+    currentTotalValue.innerText = newValue
 
     currentOrderList.appendChild(tmp.children[0])
 }
