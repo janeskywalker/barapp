@@ -334,3 +334,12 @@ button.search {
 form.new-order {
     padding: 5px;
 }
+
+nav.search-nav {
+    margin-left: 20px;
+    height: 40px;
+}
+
+nav.main-nav {
+    margin-left: 20px;
+}

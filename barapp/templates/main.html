@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <nav class="main-nav">
+        <a href='accounts/logout/' id='logoutButton'>
+            <button class='nav-buttons' id='logoutButton'>Log Out</button></a>
 
+        <a href='/search' id='searchPageButton'>
+            <button class='nav-buttons' id='drinkSearchButton'>Find Drink Recipes</button></a>
+    </nav>
     <main class="container">
+           
         <!-- categories  -->
         <section id='category-panel' class="cats">
             {% for category in categories %}

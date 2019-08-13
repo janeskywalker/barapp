@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<nav class="search-nav">
+    <a href='accounts/logout/' id='logoutButton'>
+        <button class='nav-buttons' id='logoutButton'>Log Out</button></a>
+
+    <a href='/categories' id='searchPageButton'>
+            <button class='hidden nav-buttons' id='drinkSearchButton'>Order Entry</button></a>
+</nav>
+
   <form class='search' method="post" action="{% url 'search' %}">
       {% csrf_token %}
     <input class='search' type="text" name="search-term" placeholder='Drink or Ingredient Name' required><br/>
