@@ -790,7 +790,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$150000$vAo638AHMKvV$RErtXx7y4PbhAtHx5bSszsd+Aqa6QmeWXF5Cuex/NFo=	2019-08-10 21:30:20.323685-07	t	jane			jane@jane.com	t	t	2019-08-10 21:30:00.414348-07
+1	pbkdf2_sha256$150000$vAo638AHMKvV$RErtXx7y4PbhAtHx5bSszsd+Aqa6QmeWXF5Cuex/NFo=	2019-08-10 21:56:37.563867-07	t	jane			jane@jane.com	t	t	2019-08-10 21:30:00.414348-07
 \.
 
 
@@ -820,6 +820,10 @@ COPY public.barapp_category (id, name) FROM stdin;
 3	Whiskey
 5	Mixers
 6	Vodka
+7	Tequila
+8	Wine
+9	Liqueur
+11	Gin
 \.
 
 
@@ -832,6 +836,14 @@ COPY public.barapp_drink (id, name, category_id) FROM stdin;
 2	Rum and Coke	2
 3	Mojito	2
 4	Bloddy Mary	6
+6	Guinness	1
+7	Gin and Tonic	11
+8	Manhattan	3
+9	Margarita	7
+10	Moscow Mule	6
+11	House Red	8
+12	House White	8
+13	Martini	11
 \.
 
 
@@ -850,6 +862,20 @@ COPY public.barapp_drink_ingredients (id, drink_id, ingredient_id) FROM stdin;
 9	4	8
 10	4	9
 11	4	10
+14	6	11
+15	7	13
+16	7	14
+17	8	16
+18	8	15
+19	9	17
+20	9	4
+21	10	18
+22	10	19
+23	10	4
+24	11	20
+25	12	21
+26	13	16
+27	13	22
 \.
 
 
@@ -859,7 +885,6 @@ COPY public.barapp_drink_ingredients (id, drink_id, ingredient_id) FROM stdin;
 
 COPY public.barapp_ingredient (id, name, price, category_id) FROM stdin;
 1	Spaten Oktoberfest	8	1
-2	Captain Morgan	10	2
 3	Coke	2	5
 4	Lime Juice	1	5
 5	Club Soda	1	5
@@ -868,6 +893,20 @@ COPY public.barapp_ingredient (id, name, price, category_id) FROM stdin;
 8	Absolute	8	6
 9	Tomato Juice	1	5
 10	Tabasco Sauce	0	5
+11	Guinness Drought	8	1
+13	Tanqueray Gin	12	11
+14	Tonic Water	1	5
+15	Crown Royal	10	3
+16	Vermouth	2	9
+2	Captain Morgan	10	2
+17	Patron Silver	12	7
+18	Ginger Beer	2	5
+19	Belvedere Vodka	10	6
+20	Portovenere Cabernet	5	8
+21	Venezia Chardonnay	6	8
+22	Hendrick's	8	11
+23	Dalmor 12 year	18	3
+24	MacCallan 18	25	3
 \.
 
 
@@ -876,7 +915,16 @@ COPY public.barapp_ingredient (id, name, price, category_id) FROM stdin;
 --
 
 COPY public.barapp_tab (id, name, open_date_time, close_date_time) FROM stdin;
-1	Customer James	2019-08-10 21:32:52.247692-07	\N
+11	Customer Jim	2019-08-11 18:12:49.021396-07	\N
+17	Bob	2019-08-11 21:08:45.085927-07	2019-08-11 21:10:07.423411-07
+16	Ted	2019-08-11 18:40:50.748191-07	2019-08-11 21:13:25.715004-07
+12	Kevin	2019-08-11 18:21:52.287727-07	2019-08-11 21:13:58.145674-07
+13	Bob	2019-08-11 18:22:28.933317-07	2019-08-11 21:20:53.607425-07
+18	Larry	2019-08-11 21:28:46.072396-07	\N
+15	Rachel	2019-08-11 18:25:03.834795-07	2019-08-12 11:31:46.801583-07
+1	Customer James	2019-08-10 21:32:52.247692-07	2019-08-12 11:34:51.188373-07
+14	Larry	2019-08-11 18:24:00.687997-07	2019-08-12 21:30:17.779374-07
+19	Kevin	2019-08-12 21:34:34.942481-07	\N
 \.
 
 
@@ -886,6 +934,17 @@ COPY public.barapp_tab (id, name, open_date_time, close_date_time) FROM stdin;
 
 COPY public.barapp_tab_drinks (id, tab_id, drink_id) FROM stdin;
 1	1	1
+2	16	1
+3	16	2
+4	16	6
+5	16	4
+6	18	1
+7	18	6
+8	18	2
+11	14	1
+12	14	6
+13	14	7
+14	19	8
 \.
 
 
@@ -895,6 +954,13 @@ COPY public.barapp_tab_drinks (id, tab_id, drink_id) FROM stdin;
 
 COPY public.barapp_tab_ingredients (id, tab_id, ingredient_id) FROM stdin;
 1	1	1
+2	16	3
+3	16	9
+4	16	6
+11	14	1
+12	14	11
+13	19	15
+14	19	24
 \.
 
 
@@ -927,6 +993,55 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 22	2019-08-10 21:44:00.698675-07	9	Tomato Juice	1	[{"added": {}}]	9	1
 23	2019-08-10 21:44:27.442384-07	10	Tabasco Sauce	1	[{"added": {}}]	9	1
 24	2019-08-10 21:44:35.015228-07	4	Bloddy Mary	1	[{"added": {}}]	8	1
+25	2019-08-11 09:31:57.800303-07	11	Guinness Drought	1	[{"added": {}}]	9	1
+26	2019-08-11 09:32:01.664199-07	5	Guinness	1	[{"added": {}}]	8	1
+27	2019-08-11 09:42:26.193837-07	5	Guinness	3		8	1
+28	2019-08-11 09:43:47.549194-07	12	Guinness Drought	1	[{"added": {}}]	9	1
+29	2019-08-11 09:44:53.059172-07	6	Guinness	1	[{"added": {}}]	8	1
+30	2019-08-11 16:24:52.463329-07	12	Guinness Drought	3		9	1
+31	2019-08-11 18:13:34.160582-07	10	Customer Jim	3		10	1
+32	2019-08-11 18:13:34.167737-07	9	Customer Jim	3		10	1
+33	2019-08-11 18:13:34.169305-07	8	Customer Jim	3		10	1
+34	2019-08-11 18:13:34.170238-07	7	Customer Jim	3		10	1
+35	2019-08-11 18:13:34.171229-07	6	Customer Jim	3		10	1
+36	2019-08-11 18:13:34.172581-07	5	Customer Jim	3		10	1
+37	2019-08-11 18:13:34.173881-07	4	Customer Jim	3		10	1
+38	2019-08-11 18:13:34.175158-07	3	Customer Jim	3		10	1
+39	2019-08-11 18:13:34.176339-07	2	Customer Jim	3		10	1
+40	2019-08-11 18:58:34.606323-07	16	Ted	2	[{"changed": {"fields": ["drinks"]}}]	10	1
+41	2019-08-11 19:05:49.236464-07	16	Ted	2	[{"changed": {"fields": ["ingredients"]}}]	10	1
+42	2019-08-12 18:41:53.637156-07	14	Larry	2	[]	10	1
+43	2019-08-12 18:58:20.427733-07	14	Larry	2	[{"changed": {"fields": ["ingredients"]}}]	10	1
+44	2019-08-12 21:02:10.226251-07	14	Larry	2	[{"changed": {"fields": ["drinks", "ingredients"]}}]	10	1
+45	2019-08-12 21:02:42.523718-07	6	Guinness	2	[{"changed": {"fields": ["ingredients"]}}]	8	1
+46	2019-08-12 21:08:34.032999-07	7	Tequila	1	[{"added": {}}]	7	1
+47	2019-08-12 21:09:01.174663-07	8	Wine	1	[{"added": {}}]	7	1
+48	2019-08-12 21:10:40.227035-07	9	Liqueur	1	[{"added": {}}]	7	1
+49	2019-08-12 21:10:55.170265-07	10	Sake	1	[{"added": {}}]	7	1
+50	2019-08-12 21:11:41.484251-07	10	Sake	3		7	1
+51	2019-08-12 21:11:57.720702-07	11	Gin	1	[{"added": {}}]	7	1
+52	2019-08-12 21:13:00.542997-07	13	Tanqueray Gin	1	[{"added": {}}]	9	1
+53	2019-08-12 21:13:50.24779-07	14	Tonic Water	1	[{"added": {}}]	9	1
+54	2019-08-12 21:13:53.33001-07	7	Gin and Tonic	1	[{"added": {}}]	8	1
+55	2019-08-12 21:15:15.063973-07	15	Crown Royal	1	[{"added": {}}]	9	1
+56	2019-08-12 21:15:40.522675-07	16	Vermouth	1	[{"added": {}}]	9	1
+57	2019-08-12 21:15:49.010484-07	8	Manhattan	1	[{"added": {}}]	8	1
+58	2019-08-12 21:16:10.31498-07	16	Vermouth	2	[{"changed": {"fields": ["category"]}}]	9	1
+59	2019-08-12 21:16:30.593914-07	2	Captain Morgan	2	[]	9	1
+60	2019-08-12 21:17:48.6725-07	17	Patron Silver	1	[{"added": {}}]	9	1
+61	2019-08-12 21:18:09.857483-07	9	Margarita	1	[{"added": {}}]	8	1
+62	2019-08-12 21:19:57.903244-07	18	Ginger Beer	1	[{"added": {}}]	9	1
+63	2019-08-12 21:21:07.046441-07	19	Belvedere Vodka	1	[{"added": {}}]	9	1
+64	2019-08-12 21:21:57.066118-07	10	Moscow Mule	1	[{"added": {}}]	8	1
+65	2019-08-12 21:25:29.31427-07	20	Portovenere Cabernet	1	[{"added": {}}]	9	1
+66	2019-08-12 21:25:36.178673-07	11	House Red	1	[{"added": {}}]	8	1
+67	2019-08-12 21:28:11.986836-07	21	Venezia Chardonnay	1	[{"added": {}}]	9	1
+68	2019-08-12 21:28:20.61551-07	12	House White	1	[{"added": {}}]	8	1
+69	2019-08-12 21:29:41.593612-07	22	Hendrick's	1	[{"added": {}}]	9	1
+70	2019-08-12 21:29:51.375736-07	13	Martini	1	[{"added": {}}]	8	1
+71	2019-08-12 21:35:03.669861-07	23	Dalmor 12 year	1	[{"added": {}}]	9	1
+72	2019-08-12 21:35:32.16637-07	24	McCallan 18	1	[{"added": {}}]	9	1
+73	2019-08-12 21:36:00.168925-07	24	MacCallan 18	2	[{"changed": {"fields": ["name"]}}]	9	1
 \.
 
 
@@ -971,6 +1086,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 16	auth	0011_update_proxy_permissions	2019-08-10 21:29:45.279256-07
 17	barapp	0001_initial	2019-08-10 21:29:45.31346-07
 18	sessions	0001_initial	2019-08-10 21:29:45.339442-07
+19	barapp	0002_auto_20190812_0157	2019-08-11 18:57:58.741698-07
 \.
 
 
@@ -979,7 +1095,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 --
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
-ruvf11clmas4qqk8k3v8ytbm5ow0ttxt	NmVlMGU2YTk2NTE2YWQzMDFiZGQxMDgyMmFiYzU5ZTRlOGNlNzNjMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjMzY1OGJiOTg2NzI4OTc0OTdlZTllNWE5Y2RiMzEyODgyOGI1NzUyIn0=	2019-08-24 21:30:20.325756-07
+ruvf11clmas4qqk8k3v8ytbm5ow0ttxt	NmVlMGU2YTk2NTE2YWQzMDFiZGQxMDgyMmFiYzU5ZTRlOGNlNzNjMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjMzY1OGJiOTg2NzI4OTc0OTdlZTllNWE5Y2RiMzEyODgyOGI1NzUyIn0=	2019-08-26 21:38:32.635498-07
 \.
 
 
@@ -1029,56 +1145,56 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: barapp_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: janeskywalker
 --
 
-SELECT pg_catalog.setval('public.barapp_category_id_seq', 6, true);
+SELECT pg_catalog.setval('public.barapp_category_id_seq', 11, true);
 
 
 --
 -- Name: barapp_drink_id_seq; Type: SEQUENCE SET; Schema: public; Owner: janeskywalker
 --
 
-SELECT pg_catalog.setval('public.barapp_drink_id_seq', 4, true);
+SELECT pg_catalog.setval('public.barapp_drink_id_seq', 13, true);
 
 
 --
 -- Name: barapp_drink_ingredients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: janeskywalker
 --
 
-SELECT pg_catalog.setval('public.barapp_drink_ingredients_id_seq', 11, true);
+SELECT pg_catalog.setval('public.barapp_drink_ingredients_id_seq', 27, true);
 
 
 --
 -- Name: barapp_ingredient_id_seq; Type: SEQUENCE SET; Schema: public; Owner: janeskywalker
 --
 
-SELECT pg_catalog.setval('public.barapp_ingredient_id_seq', 10, true);
+SELECT pg_catalog.setval('public.barapp_ingredient_id_seq', 24, true);
 
 
 --
 -- Name: barapp_tab_drinks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: janeskywalker
 --
 
-SELECT pg_catalog.setval('public.barapp_tab_drinks_id_seq', 1, true);
+SELECT pg_catalog.setval('public.barapp_tab_drinks_id_seq', 14, true);
 
 
 --
 -- Name: barapp_tab_id_seq; Type: SEQUENCE SET; Schema: public; Owner: janeskywalker
 --
 
-SELECT pg_catalog.setval('public.barapp_tab_id_seq', 1, true);
+SELECT pg_catalog.setval('public.barapp_tab_id_seq', 19, true);
 
 
 --
 -- Name: barapp_tab_ingredients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: janeskywalker
 --
 
-SELECT pg_catalog.setval('public.barapp_tab_ingredients_id_seq', 1, true);
+SELECT pg_catalog.setval('public.barapp_tab_ingredients_id_seq', 14, true);
 
 
 --
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: janeskywalker
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 24, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 73, true);
 
 
 --
@@ -1092,7 +1208,7 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 10, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: janeskywalker
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 18, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 19, true);
 
 
 --

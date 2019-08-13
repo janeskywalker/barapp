@@ -2,9 +2,13 @@
 
 const drinkButton = document.querySelector('.drink-button')
 const drinkList = document.querySelector('#drink-list')
+const currentOrderList = document.querySelector('#current-order-list')
+const orderItem = document.querySelector('.order-item')
 
 const ingredientButton = document.querySelector('.ingredient-button')
 const ingredientList = document.querySelector('#ingredient-list')
+
+const currentTotalValue = document.querySelector('#current-total-value')
 
 // hide and show drink/ingredients list 
 drinkButton.addEventListener('click', (e)=>{
@@ -18,6 +22,24 @@ ingredientButton.addEventListener('click', (e)=>{
     drinkList.classList.add('hide')
 })
 
+function addDrinkToList(newDrink) {
+    const tmp = document.createElement('div')
+    tmp.innerHTML = `
+        <li class="order-item">
+            <p>Drink: ${newDrink.name}</p>
+            <p>Price: $${newDrink.price}</p>
+        </li>
+    `
+
+    console.log(currentTotalValue.innerText)
+    const oldValue = parseInt(currentTotalValue.innerText)
+    const newValue = oldValue + newDrink.price
+
+    currentTotalValue.innerText = newValue
+
+    currentOrderList.appendChild(tmp.children[0])
+}
+
 // on click of drink and ingredient btn, item get to be added to db
 drinkList.addEventListener('click', (e)=>{
     const target = e.target
@@ -25,19 +47,21 @@ drinkList.addEventListener('click', (e)=>{
     if (target.dataset['id']) {
         console.log(target.dataset['id'])
 
-        fetch('/addDrinkToOrder', {
+       fetch('/addDrinkToOrder', {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfcookie()
             },
+            // sent an json object to server, giving it a drink_id
             body: JSON.stringify({
                 drink_id: target.dataset['id']
             })
-        }).then((response) => {
-            console.log('response: ', response)
-            // Render drink to sidebar
+        }).then(async (response) => {
+            const newDrink = await response.json()
+            addDrinkToList(newDrink)
         })
+
     }
 })
 
@@ -57,9 +81,8 @@ ingredientList.addEventListener('click', (e)=>{
                 ingredient_id: target.dataset['id']
             })
         }).then(async (response) => {
-            console.log('response: ', response)
-            console.log(await response.json())
-            // Render drink to sidebar
+            const newDrink = await response.json()
+            addDrinkToList(newDrink)
         })
     }
 })
