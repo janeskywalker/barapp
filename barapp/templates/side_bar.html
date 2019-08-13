@@ -6,7 +6,7 @@
 <!-- not in session -->
 <!-- tabs got sent back from server -->
 <section id="list-order" class="list-order tab {% if 'current_tab' not in request.session %} show{% endif %}">
-        <h3>List of Order:</h3>
+        <h3 class="order-list">Order:</h3>
     
         <ul id="order-list">
                 {% if tabs %}
@@ -28,10 +28,10 @@
 <!-- new order form, severed by js-->
 <section id="new-order" class="new-order tab">
 
-    <form action="{% url 'new-order' %}" method="POST" class="new-order-form">
+    <form class="new-order" action="{% url 'new-order' %}" method="POST" class="new-order-form">
             {% csrf_token %}
 
-            <p>
+            <p class="new-order">
                 <label for="Customer Name">Customer Name</label>
                 <input type="text" name="customername" required maxlength="25" minlength="2" />
             </p>
@@ -46,12 +46,12 @@
 <!-- current order -->
 <!-- in session -->
 <!-- tab got sent back from server-->
-<section id="current-order" class="list-order tab {% if 'current_tab' in request.session %} show{% endif %}">
-        <h3>Current Order:</h3>
+<section id="current-order" class="list-order tab {% if 'current_tab' in request.session %} show {% endif %}">
+        <h3 class='list-order'>Current Order:</h3>
 
         {% if tab %}
 
-        <p>{{tab.name}}</p>
+        <p class='tab-name'>{{tab.name}}</p>
 
         <ul id="current-order-list" class="current-order-list">
             {% for drink in tab.drinks %}
@@ -69,14 +69,14 @@
             {% endfor %}
         </ul>
 
-        <p id='current-order-total'>Total: $<span id="current-total-value">{{tab.total}}</span></p>
+        <p class="total" id='current-order-total'>Total: $<span id="current-total-value">{{tab.total}}</span></p>
 
         {% endif %}
         
         <div class="tab-buttons">
                 <a href="/closetab/{{tab.id}}" id="close-tab-btn" class="close-tab">Close Tab</a>
 
-                <a href="/saveorder/{{tab.id}}" id="save-order-btn" class="save-order">Save Order</a>
+                <a href="/saveorder/{{tab.id}}" id="save-order-btn" class="save-order">Save Tab</a>
 
         </div>
 

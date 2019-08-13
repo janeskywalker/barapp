@@ -7,8 +7,8 @@
         <section id='category-panel' class="cats">
             {% for category in categories %}
                 <a href="category/{{category.id}}">
-                    <div class="category">
-                        <h3>{{category.name}}</h3>
+                    <div class="category {{category.name}}">
+                        <h3 class="category">{{category.name}}</h3>
                     </div>
                 </a>
             {% endfor %}

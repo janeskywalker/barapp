@@ -14,10 +14,13 @@
     <header>
         <h1>BarApp</h1>
         <h2>Welcome {{user.username}}!</h2>
+        <a href='/logout' id='logoutButton'>
+        <button class='nav-buttons' id='logoutButton'>Log Out</button></a>
+
         <a href='/search' id='searchPageButton'>
         <button class='nav-buttons' id='drinkSearchButton'>Find Drink Recipes</button></a>
-        <a href='/' id='searchPageButton'>
-            <button class='hidden nav-buttons' id='drinkSearchButton'>Drink Order Page</button></a>
+        <a href='/categories' id='searchPageButton'>
+            <button class='hidden nav-buttons' id='drinkSearchButton'>Order Entry</button></a>
     </header>
 
 {% block content %}
