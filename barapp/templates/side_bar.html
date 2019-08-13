@@ -4,6 +4,7 @@
 
 <!-- list of customers and new order button -->
 <!-- not in session -->
+<!-- tabs got sent back from server -->
 <section id="list-order" class="list-order tab {% if 'current_tab' not in request.session %} show{% endif %}">
         <h3>List of Order:</h3>
     
@@ -44,6 +45,7 @@
 
 <!-- current order -->
 <!-- in session -->
+<!-- tab got sent back from server-->
 <section id="current-order" class="list-order tab {% if 'current_tab' in request.session %} show{% endif %}">
         <h3>Current Order:</h3>
 

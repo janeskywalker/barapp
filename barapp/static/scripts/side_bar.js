@@ -5,7 +5,7 @@ const closeTabBtn = document.querySelector('#close-tab-btn')
 const listOrderSection = document.querySelector('#list-order')
 const currentOrderSection = document.querySelector('#current-order')
 const newOrderSection = document.querySelector('#new-order')
-const orderList = document.querySelector('#order-list')
+
 
 // user press new order btn, js serve the page with a form to fill in new customer name 
 newOrderBtn.addEventListener('click', (e)=>{

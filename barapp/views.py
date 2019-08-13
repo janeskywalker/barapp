@@ -28,13 +28,15 @@ def pretty_request(request):
         body=request.body,
     )
 
-
+# adds up the ingredient price
 def priceForIngredients(ingredients):
     price = 0
     for ing in ingredients:
         price = price + ing['price']
     return price
 
+# given a drink, return a dicctioney of drink name and price
+# in our drink model, drink dont have a price, it is the ingredients's price
 def findDrinkPrice(drink):
     return {
         'name': drink.name,
@@ -90,6 +92,45 @@ def category(request, category_pk):
         return render(request, 'category.html', { 'tabs': tabs, 'drinks': drinks, 'ingredients': ingredients})
 
 
+# add drink to db for current session
+def addDrinkToOrder(request):
+    if 'current_tab' in request.session:
+        if request.method == 'POST':
+            # grab current_tab from session
+            current_tab = request.session['current_tab']
+            # with id go grab the current tab
+            tab = Tab.objects.get(id=current_tab)
+            # grab requst body, which is a json object
+            json_obj = json.loads(request.body)
+            # extract the drink_id
+            drink_id = json_obj['drink_id']
+            # add the new drink to tab
+            tab.drinks.add(Drink.objects.get(id=drink_id))
+
+            newDrink = findDrinkPrice(Drink.objects.get(id=drink_id))
+            print(newDrink)
+ 
+            return JsonResponse(newDrink)
+
+    return JsonResponse({ 'status': 'error'})
+
+
+# add ingredient to db for current session
+def addIngredientToOrder(request):
+    if 'current_tab' in request.session:
+        if request.method == 'POST':
+            current_tab = request.session['current_tab']
+            tab = Tab.objects.get(id=current_tab)
+            json_obj = json.loads(request.body)
+            ingredient_id = json_obj['ingredient_id']
+            tab.ingredients.add(Ingredient.objects.get(id=ingredient_id))
+            return JsonResponse({ 'status': 'success' })
+    return JsonResponse({ 'status': 'error' })
+
+
+
+
+
 # after user press sumbit new order btn, we save the customer name to db, set session to this current customer
 def newOrder(request):
     if request.method == 'POST':
@@ -99,7 +140,6 @@ def newOrder(request):
         print(tab.id)
 
         request.session['current_tab'] = tab.id
-
         return redirect('main')
         
 # kill current session
@@ -124,29 +164,3 @@ def closeTab(request, tab_pk):
         if 'current_tab' in request.session:
             del request.session['current_tab']
         return redirect('main')
-
-# add drink to db for current session
-def addDrinkToOrder(request):
-    if 'current_tab' in request.session:
-        if request.method == 'POST':
-            current_tab = request.session['current_tab']
-            tab = Tab.objects.get(id=current_tab)
-            json_obj = json.loads(request.body)
-            drink_id = json_obj['drink_id']
-            tab.drinks.add(Drink.objects.get(id=drink_id))
-            return JsonResponse({ 'status': 'success' })
-    return JsonResponse({ 'status': 'error' })
-
-# add ingredient to db for current session
-def addIngredientToOrder(request):
-    if 'current_tab' in request.session:
-        if request.method == 'POST':
-            current_tab = request.session['current_tab']
-            tab = Tab.objects.get(id=current_tab)
-            json_obj = json.loads(request.body)
-            ingredient_id = json_obj['ingredient_id']
-            tab.ingredients.add(Ingredient.objects.get(id=ingredient_id))
-            return JsonResponse({ 'status': 'success' })
-    return JsonResponse({ 'status': 'error' })
-
-
