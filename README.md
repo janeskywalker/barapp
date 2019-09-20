@@ -1,4 +1,4 @@
-#App Name: BarApp
+App Name: BarApp
 
 Heroku Link: https://b-a-rapp.herokuapp.com
 
