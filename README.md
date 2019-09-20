@@ -2,7 +2,7 @@
 
 ### Heroku Link: https://b-a-rapp.herokuapp.com
 
-## Bartender point of sale application with manager page to make changes to bar inventory.
+## Bartender point of sale application with manager back page to make changes to bar inventory.
 
 Technologies Used: Django, PostgreSQL
 
