@@ -1,6 +1,6 @@
-### App Name: BarApp
+# App Name: BarApp
 
-# Heroku Link: https://b-a-rapp.herokuapp.com
+### Heroku Link: https://b-a-rapp.herokuapp.com
 
 ## Bartender point of sale application with manager page to make changes to bar inventory.
 
